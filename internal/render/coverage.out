@@ -1,0 +1,23 @@
+mode: set
+github.com/nikicivan/bookings-in-go/internal/render/render.go:22.40,24.2 1 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:26.84,32.2 5 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:35.105,37.18 2 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:45.2,46.9 2 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:50.2,57.16 5 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:61.2,61.12 1 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:37.18,41.3 1 0
+github.com/nikicivan/bookings-in-go/internal/render/render.go:41.8,43.3 1 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:46.9,48.3 1 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:57.16,60.3 2 0
+github.com/nikicivan/bookings-in-go/internal/render/render.go:65.67,69.16 3 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:74.2,74.29 1 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:103.2,103.21 1 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:69.16,72.3 2 0
+github.com/nikicivan/bookings-in-go/internal/render/render.go:74.29,79.17 3 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:84.3,86.17 2 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:91.3,91.23 1 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:79.17,82.4 2 0
+github.com/nikicivan/bookings-in-go/internal/render/render.go:86.17,89.4 2 0
+github.com/nikicivan/bookings-in-go/internal/render/render.go:91.23,94.18 2 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:99.4,99.22 1 1
+github.com/nikicivan/bookings-in-go/internal/render/render.go:94.18,97.5 2 0

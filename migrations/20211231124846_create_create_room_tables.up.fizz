@@ -1,0 +1,4 @@
+create_table("rooms") {
+  t.Column("id", "integer", { primary: true, auto_increment: true })
+  t.Column("room_name", "string", { "default": "" })
+}
