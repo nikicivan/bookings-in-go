@@ -27,6 +27,11 @@ var functions = template.FuncMap{}
 
 func TestMain(m *testing.M) {
 	gob.Register(models.Reservation{})
+	gob.Register(models.User{})
+	gob.Register(models.Room{})
+	gob.Register(models.Restriction{})
+	gob.Register(map[string]int{})
+
 	// change this to true when in production
 	app.InProduction = false
 
@@ -38,6 +43,8 @@ func TestMain(m *testing.M) {
 
 	app.Session = session
 
+	listenForMail()
+
 	tc, err := CreateTestTemplateCache()
 	if err != nil {
 		log.Fatal("can not create template cache")
@@ -45,6 +52,10 @@ func TestMain(m *testing.M) {
 
 	app.TemlateCache = tc
 	app.UseCache = true
+
+	mailChan := make(chan models.MailData)
+	app.MailChan = mailChan
+	defer close(mailChan)
 
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
 	app.InfoLog = infoLog
@@ -58,6 +69,14 @@ func TestMain(m *testing.M) {
 	render.NewTemplates(&app)
 
 	os.Exit(m.Run())
+}
+
+func listenForMail() {
+	go func() {
+		for {
+			_ = <-app.MailChan
+		}
+	}()
 }
 
 func getRoutes() http.Handler {
@@ -84,6 +103,21 @@ func getRoutes() http.Handler {
 	mux.Post("/search-availability-json", Repo.AvailabilityJSON)
 
 	mux.Get("/contact", Repo.Contact)
+
+	mux.Get("/user/login", Repo.ShowLogin)
+	mux.Post("/user/login", Repo.PostShowLogin)
+	mux.Get("/user/logout", Repo.Logout)
+
+	mux.Get("/admin/dashboard", Repo.AdminDashboard)
+	mux.Get("/admin/reservations-new", Repo.AdminNewReservations)
+	mux.Get("/admin/reservations-all", Repo.AdminAllReservations)
+	mux.Get("/admin/reservations-calendar", Repo.AdminReservationsCalendar)
+	mux.Post("/admin/reservations-calendar", Repo.AdminPostReservationsCalendar)
+	mux.Get("/admin/process-reservation/{res}/{id}/do", Repo.AdminProcessReservation)
+	mux.Get("/admin/delete-reservation/{res}/{id}/do", Repo.AdminDeleteReservation)
+
+	mux.Get("/admin/reservations/{src}/{id}/show", Repo.AdminShowReservation)
+	mux.Post("/admin/reservations/{src}/{id}", Repo.AdminPostShowReservation)
 
 	fileServer := http.FileServer(http.Dir("../../static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
